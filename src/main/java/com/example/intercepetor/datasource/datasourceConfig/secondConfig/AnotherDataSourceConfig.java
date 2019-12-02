@@ -1,5 +1,6 @@
 package com.example.intercepetor.datasource.datasourceConfig.secondConfig;
 
+import com.example.intercepetor.common.SystemConsts;
 import com.example.intercepetor.datasource.datasourceHolder.MyDynamicDataSource;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,10 +37,10 @@ public class AnotherDataSourceConfig {
         Map<String, Map<String, String>> dataProperties = dataSourceDTO.getDatasource();
         dataProperties.forEach((key, value)->{
             DriverManagerDataSource dataSource = new DriverManagerDataSource();
-            dataSource.setDriverClassName(MapUtils.getString(value, "driver-class-name"));
-            dataSource.setUrl(MapUtils.getString(value, "url"));
-            dataSource.setUsername(MapUtils.getString(value, "username"));
-            dataSource.setPassword(MapUtils.getString(value, "password"));
+            dataSource.setDriverClassName(MapUtils.getString(value, SystemConsts.DataSourceConfig.driver));
+            dataSource.setUrl(MapUtils.getString(value, SystemConsts.DataSourceConfig.url));
+            dataSource.setUsername(MapUtils.getString(value, SystemConsts.DataSourceConfig.username));
+            dataSource.setPassword(MapUtils.getString(value, SystemConsts.DataSourceConfig.password));
             map.put(key, dataSource);
         });
         return map;

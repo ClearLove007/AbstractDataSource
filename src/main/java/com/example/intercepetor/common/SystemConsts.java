@@ -18,4 +18,11 @@ public interface SystemConsts {
     interface ErrMsg{
         String AUTH_ERR_MSG = "验证失败，请重新验证";
     }
+
+    interface DataSourceConfig{
+        String url = "url";
+        String username = "username";
+        String password = "password";
+        String driver = "driver-class-name";
+    }
 }
