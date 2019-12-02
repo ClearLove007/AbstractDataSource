@@ -1,6 +1,6 @@
 package com.example.intercepetor.intercepter;
 
-import com.example.intercepetor.common.AuthException;
+import com.example.intercepetor.common.exception.AuthException;
 import com.example.intercepetor.common.SystemConsts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;

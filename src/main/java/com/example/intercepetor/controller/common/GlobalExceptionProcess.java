@@ -1,7 +1,7 @@
 package com.example.intercepetor.controller.common;
 
-import com.example.intercepetor.common.AuthException;
-import com.example.intercepetor.common.ServiceException;
+import com.example.intercepetor.common.exception.AuthException;
+import com.example.intercepetor.common.exception.ServiceException;
 import com.example.intercepetor.dto.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;

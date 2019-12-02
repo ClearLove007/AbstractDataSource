@@ -1,6 +1,6 @@
 package com.example.intercepetor.utils;
 
-import com.example.intercepetor.common.ServiceException;
+import com.example.intercepetor.common.exception.ServiceException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
