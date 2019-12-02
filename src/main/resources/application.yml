@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    master:
+      username: root
+      password: 123456
+      url: jdbc:mysql://localhost:3306/intercepter?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    severnt:
+      username: root
+      password: 123456
+      url: jdbc:mysql://localhost:3306/intercepter1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    third:
+      username: root
+      password: 123456
+      url: jdbc:mysql://localhost:3306/intercepter2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8080
+  servlet:
+    context-path: /dynamic
+
+my:
+  datasource:
+    id: 123
+    name: 456
