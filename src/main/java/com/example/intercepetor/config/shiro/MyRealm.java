@@ -7,6 +7,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,7 +61,7 @@ public class MyRealm extends AuthorizingRealm {
         }
         UserInfo userInfo = new UserInfo();
         userInfo.setUserName(userName);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userInfo,"123456",getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userInfo,"f6d55a291274c47f6660e32a53f5271c", ByteSource.Util.bytes("SAlt"), getName());
         log.info("验证完成:{}", userName);
         return info;
     }

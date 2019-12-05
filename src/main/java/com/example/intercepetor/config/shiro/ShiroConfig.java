@@ -1,6 +1,7 @@
 package com.example.intercepetor.config.shiro;
 
 import com.example.intercepetor.common.SystemConsts;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.mgt.SecurityManager;
@@ -70,7 +71,12 @@ public class ShiroConfig {
 
     @Bean("myRealm")
     public MyRealm shiroRealm(){
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+        matcher.setHashAlgorithmName("MD5");
+        matcher.setHashIterations(2);
+
         MyRealm myRealm = new MyRealm();
+        myRealm.setCredentialsMatcher(matcher);
         return myRealm;
     }
 
