@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,15 @@ public class GlobalExceptionProcess {
     @ExceptionHandler(value = AuthException.class)
     public ResponseDTO authException(AuthException e){
         log.error("服务异常:{}",e);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("errMsg", e.toString());
+        return new ResponseDTO(map);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = SQLException.class)
+    public ResponseDTO SQLException(SQLException e){
+        log.error("sql语句执行异常:{}", e);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("errMsg", e.toString());
         return new ResponseDTO(map);
