@@ -20,7 +20,3 @@ server:
   servlet:
     context-path: /dynamic
 
-my:
-  datasource:
-    id: 123
-    name: 456

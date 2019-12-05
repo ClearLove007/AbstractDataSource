@@ -1,6 +1,6 @@
 package com.example.intercepetor.controller;
 
-import com.example.intercepetor.datasource.datasourceConfig.second.DataSourceDTO;
+import com.example.intercepetor.datasource.datasourceConfig.secondConfig.DataSourceDTO;
 import com.example.intercepetor.dto.RequestDTO;
 import com.example.intercepetor.dto.ResponseDTO;
 import com.example.intercepetor.utils.JsonUtils;

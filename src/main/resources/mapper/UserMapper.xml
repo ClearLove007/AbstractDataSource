@@ -6,4 +6,8 @@
         select * from tbl_user_info
     </select>
 
+    <insert id="insert" parameterType="com.example.intercepetor.entity.User">
+        insert into tbl_user_info values(#{user.id},#{user.name})
+    </insert>
+
 </mapper>
