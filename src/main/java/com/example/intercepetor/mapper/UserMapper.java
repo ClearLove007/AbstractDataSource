@@ -1,6 +1,7 @@
 package com.example.intercepetor.mapper;
 
 import com.example.intercepetor.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,6 @@ import java.util.List;
 public interface UserMapper {
 
     List<User> selectAll();
+
+    void insert(@Param("user")User user);
 }

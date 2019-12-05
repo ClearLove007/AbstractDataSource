@@ -26,6 +26,7 @@ public class HandlerIntercepter extends HandlerInterceptorAdapter {
 
         if (!StringUtils.isEmpty(token)){
             if (token.equals(SystemConsts.Token.TOKEN)){
+                log.info("用户ip:{}已连接", getAddress(request));
                 return true;
             } else {
                 throw new AuthException(SystemConsts.ErrCode.AUTH_ERR_CODE, SystemConsts.ErrMsg.AUTH_ERR_MSG);
@@ -48,5 +49,19 @@ public class HandlerIntercepter extends HandlerInterceptorAdapter {
             params.put(name, valueStr);
         }
         return params;
+    }
+
+    private String getAddress(HttpServletRequest request){
+        String ip = request.getHeader("x-forwarded-for");
+        if (StringUtils.isEmpty(ip) || StringUtils.pathEquals(ip, "unknown")){
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (StringUtils.isEmpty(ip) || StringUtils.pathEquals(ip, "unknown")){
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (StringUtils.isEmpty(ip) || StringUtils.pathEquals(ip, "unknown")){
+            ip = request.getRemoteAddr();
+        }
+        return ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
     }
 }
