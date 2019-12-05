@@ -1,5 +1,7 @@
 package com.example.intercepetor.common;
 
+import java.security.SecureRandom;
+
 /**
  * @Author: XueWeiDong
  * @Description:
@@ -24,5 +26,12 @@ public interface SystemConsts {
         String username = "username";
         String password = "password";
         String driver = "driver-class-name";
+    }
+
+    interface ShiroConfig{
+        //AES加密cookie密钥
+        byte[] KEY = SecureRandom.getSeed(16);
+
+        int COOKIE_AGE = 60*60*24*30;
     }
 }
