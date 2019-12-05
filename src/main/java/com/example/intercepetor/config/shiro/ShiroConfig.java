@@ -1,6 +1,7 @@
 package com.example.intercepetor.config.shiro;
 
 import com.example.intercepetor.common.SystemConsts;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
@@ -10,7 +11,9 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -91,7 +94,7 @@ public class ShiroConfig {
     @Bean("redisManager")
     public RedisManager redisManager(){
         RedisManager redisManager = new RedisManager();
-        redisManager.setHost("localhost");
+        redisManager.setHost("127.0.0.1:6379");
         return redisManager;
     }
 
@@ -129,6 +132,26 @@ public class ShiroConfig {
         rememberMeManager.setCipherKey(SystemConsts.ShiroConfig.KEY);
         rememberMeManager.setCookie(cookie);
         return rememberMeManager;
+    }
+
+    /***********************************************************************************
+     * 开启shiro注解
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor
+                = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
+    @Bean
+    @ConditionalOnMissingBean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+        defaultAAP.setProxyTargetClass(true);
+        return defaultAAP;
     }
 
 }
