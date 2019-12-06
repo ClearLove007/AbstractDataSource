@@ -2,6 +2,7 @@ package com.example.intercepetor.config.shiro;
 
 import com.example.intercepetor.common.SystemConsts;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.mgt.SecurityManager;
@@ -135,7 +136,7 @@ public class ShiroConfig {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(SystemConsts.ShiroConfig.COOKIE_AGE);
         CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
-        rememberMeManager.setCipherKey(SystemConsts.ShiroConfig.KEY);
+        rememberMeManager.setCipherKey(Base64.decode(SystemConsts.ShiroConfig.KEY));
         rememberMeManager.setCookie(cookie);
         return rememberMeManager;
     }
