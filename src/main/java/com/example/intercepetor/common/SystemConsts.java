@@ -30,7 +30,7 @@ public interface SystemConsts {
 
     interface ShiroConfig{
         //AES加密cookie密钥
-        byte[] KEY = SecureRandom.getSeed(16);
+        byte[] KEY = "GJHSGOHBFISOHPAHDIUdd".getBytes();
 
         int COOKIE_AGE = 60*60*24*30;
     }
