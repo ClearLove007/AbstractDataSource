@@ -18,6 +18,8 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.intercepetor.datasource.datasourceAnotion.HandlerDataSourceAop.DATA_SOURCE_SUM;
+
 
 /**
  * @Author: XueWeiDong
@@ -28,6 +30,7 @@ import java.util.Map;
 @MapperScan(value = "com.example.intercepetor.mapper")
 @EnableConfigurationProperties(DataSourceDTO.class)
 public class AnotherDataSourceConfig {
+
     @Autowired
     private DataSourceDTO dataSourceDTO;
 
@@ -42,6 +45,8 @@ public class AnotherDataSourceConfig {
             dataSource.setUsername(MapUtils.getString(value, SystemConsts.DataSourceConfig.username));
             dataSource.setPassword(MapUtils.getString(value, SystemConsts.DataSourceConfig.password));
             map.put(key, dataSource);
+            //统计数据源
+            DATA_SOURCE_SUM.put(key, null);
         });
         return map;
     }

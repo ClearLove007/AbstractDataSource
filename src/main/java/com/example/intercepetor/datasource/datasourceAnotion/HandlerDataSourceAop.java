@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 /**
  * @Author: XueWeiDong
@@ -24,6 +25,8 @@ import java.lang.reflect.Method;
 @Component
 @Order(1)
 public class HandlerDataSourceAop {
+
+    public static final HashMap DATA_SOURCE_SUM = new HashMap();
 
     @Pointcut("@within(com.example.intercepetor.datasource.datasourceAnotion.DynamicSwitchDataSource)||@annotation(com.example.intercepetor.datasource.datasourceAnotion.DynamicSwitchDataSource)")
     public void handlerDataSourceAop(){}
@@ -38,10 +41,11 @@ public class HandlerDataSourceAop {
         }
         //获取注解上的数据源的值的信息
         String dataSourceKey = annotation.dataSource();
-        if (!StringUtils.isEmpty(dataSourceKey)){
+        //检验数据源是否存在
+        if (!StringUtils.isEmpty(dataSourceKey) && DATA_SOURCE_SUM.containsKey(dataSourceKey)){
             DynamicDataSourceHolder.putDataKey(dataSourceKey);
         } else {
-            log.warn("没有指定数据源");
+            log.info("没有指定的数据源, 默认走主数据源");
             return;
         }
         log.info("成功切换数据源，当前数据源:{}",DynamicDataSourceHolder.getDateKey());

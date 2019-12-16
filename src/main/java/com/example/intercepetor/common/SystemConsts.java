@@ -15,10 +15,12 @@ public interface SystemConsts {
 
     interface ErrCode{
         long AUTH_ERR_CODE = 9001L;
+        long NO_DATA_SOURCE_CODE = 9002L;
     }
 
     interface ErrMsg{
         String AUTH_ERR_MSG = "验证失败，请重新验证";
+        String NO_DATA_SOURCE_MSG = "没有指定的数据源";
     }
 
     interface DataSourceConfig{
