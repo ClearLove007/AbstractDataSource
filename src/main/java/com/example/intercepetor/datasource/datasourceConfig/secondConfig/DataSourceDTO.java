@@ -3,7 +3,6 @@ package com.example.intercepetor.datasource.datasourceConfig.secondConfig;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import java.util.Map;
  * @Date: 14:04 2019/12/2
  */
 @ConfigurationProperties(prefix = "spring")
-@Component
 @Setter
 @Getter
 public class DataSourceDTO {

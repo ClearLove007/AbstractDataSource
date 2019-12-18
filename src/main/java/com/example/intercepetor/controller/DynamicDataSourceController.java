@@ -1,6 +1,7 @@
 package com.example.intercepetor.controller;
 
 import com.example.intercepetor.datasource.datasourceAnotion.DynamicSwitchDataSource;
+import com.example.intercepetor.datasource.datasourceHolder.DynamicDataSourceHolder;
 import com.example.intercepetor.dto.ResponseDTO;
 import com.example.intercepetor.entity.User;
 import com.example.intercepetor.mapper.UserMapper;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,4 +79,27 @@ public class DynamicDataSourceController {
         return new ResponseDTO(result);
     }
 
+    @RequestMapping(value = "switch", method = RequestMethod.GET)
+    public ResponseDTO selectSwitchAll(){
+        List<List<User>> result = new ArrayList<>();
+        //查询master数据源
+        DynamicDataSourceHolder.putDataKey("master");
+        result.add(userMapper.selectAll());
+        DynamicDataSourceHolder.clearData();
+        //查询severnt数据源
+        DynamicDataSourceHolder.putDataKey("severnt");
+        result.add(userMapper.selectAll());
+        DynamicDataSourceHolder.clearData();
+        //查询third数据源
+        DynamicDataSourceHolder.putDataKey("third");
+        result.add(userMapper.selectAll());
+        DynamicDataSourceHolder.clearData();
+        return new ResponseDTO(result);
+    }
+
+    @RequestMapping(value = "switch", method = RequestMethod.POST)
+    public ResponseDTO insertSwitch(@RequestBody User user){
+        userService.insertSwitch(user);
+        return new ResponseDTO();
+    }
 }

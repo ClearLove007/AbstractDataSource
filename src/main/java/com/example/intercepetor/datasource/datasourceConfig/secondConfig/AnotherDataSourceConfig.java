@@ -1,12 +1,12 @@
 package com.example.intercepetor.datasource.datasourceConfig.secondConfig;
 
 import com.example.intercepetor.common.SystemConsts;
+import com.example.intercepetor.datasource.datasourceAnotion.HandlerDataSourceAop;
 import com.example.intercepetor.datasource.datasourceHolder.MyDynamicDataSource;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,6 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.intercepetor.datasource.datasourceAnotion.HandlerDataSourceAop.DATA_SOURCE_SUM;
 
 
 /**
@@ -31,11 +30,9 @@ import static com.example.intercepetor.datasource.datasourceAnotion.HandlerDataS
 @EnableConfigurationProperties(DataSourceDTO.class)
 public class AnotherDataSourceConfig {
 
-    @Autowired
-    private DataSourceDTO dataSourceDTO;
 
     @Bean("datasourceMap")
-    public Map<Object, Object> targetDataSource(){
+    public Map<Object, Object> targetDataSource(DataSourceDTO dataSourceDTO){
         Map<Object, Object> map = new HashMap<>();
         Map<String, Map<String, String>> dataProperties = dataSourceDTO.getDatasource();
         dataProperties.forEach((key, value)->{
@@ -46,7 +43,7 @@ public class AnotherDataSourceConfig {
             dataSource.setPassword(MapUtils.getString(value, SystemConsts.DataSourceConfig.password));
             map.put(key, dataSource);
             //统计数据源
-            DATA_SOURCE_SUM.put(key, null);
+            HandlerDataSourceAop.setDataSource(key);
         });
         return map;
     }

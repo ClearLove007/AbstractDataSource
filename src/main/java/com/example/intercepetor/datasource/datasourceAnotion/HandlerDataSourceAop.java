@@ -26,7 +26,7 @@ import java.util.HashMap;
 @Order(1)
 public class HandlerDataSourceAop {
 
-    public static final HashMap DATA_SOURCE_SUM = new HashMap();
+    private static final HashMap DATA_SOURCE_SUM = new HashMap<String, Object>();
 
     @Pointcut("@within(com.example.intercepetor.datasource.datasourceAnotion.DynamicSwitchDataSource)||@annotation(com.example.intercepetor.datasource.datasourceAnotion.DynamicSwitchDataSource)")
     public void handlerDataSourceAop(){}
@@ -54,5 +54,9 @@ public class HandlerDataSourceAop {
     @After("handlerDataSourceAop()")
     public void doAfter(){
         DynamicDataSourceHolder.clearData();
+    }
+
+    public static void setDataSource(String key){
+        DATA_SOURCE_SUM.put(key, null);
     }
 }

@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DynamicDataSourceHolder {
 
-    private static final ThreadLocal<String> HOLDER = new ThreadLocal<String>();
+    private static final ThreadLocal<String> HOLDER = new ThreadLocal<>();
 
     public static void putDataKey(String key){
         log.info("设置数据源:{}",key);

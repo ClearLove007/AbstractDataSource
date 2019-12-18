@@ -1,6 +1,6 @@
 package com.example.intercepetor.service;
 
-import com.example.intercepetor.common.exception.ServiceException;
+import com.example.intercepetor.datasource.datasourceHolder.DynamicDataSourceHolder;
 import com.example.intercepetor.entity.User;
 import com.example.intercepetor.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,23 @@ public class UserService {
     @Transactional
     public boolean insertUser(User user){
         userMapper.insert(user);
-        throw new ServiceException("添加数据出现异常");
+        return true;
+    }
+
+    @Transactional
+    public boolean insertSwitch(User user){
+        DynamicDataSourceHolder.putDataKey("master");
+        userMapper.insert(user);
+        DynamicDataSourceHolder.clearData();
+
+        DynamicDataSourceHolder.putDataKey("severnt");
+        userMapper.insert(user);
+        DynamicDataSourceHolder.clearData();
+
+        DynamicDataSourceHolder.putDataKey("third");
+        userMapper.insert(user);
+        DynamicDataSourceHolder.clearData();
+
+        return true;
     }
 }
