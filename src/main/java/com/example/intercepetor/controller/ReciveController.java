@@ -3,7 +3,7 @@ package com.example.intercepetor.controller;
 import com.example.intercepetor.datasource.datasourceConfig.secondConfig.DataSourceDTO;
 import com.example.intercepetor.dto.RequestDTO;
 import com.example.intercepetor.dto.ResponseDTO;
-import com.example.intercepetor.utils.JsonUtils;
+import com.example.intercepetor.utils.json.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
