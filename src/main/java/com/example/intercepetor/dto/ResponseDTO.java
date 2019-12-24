@@ -21,6 +21,10 @@ public class ResponseDTO extends BaseRespDto {
         this.setResponseBody(map);
     }
 
+    public ResponseDTO(String key, Object value) {
+        this.responseBody.put(key, value);
+    }
+
     public ResponseDTO(List list) {
         this.setResultCode("0");
         this.setResponseBody(list);

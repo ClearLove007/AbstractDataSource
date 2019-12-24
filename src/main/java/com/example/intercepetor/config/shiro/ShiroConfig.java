@@ -39,19 +39,19 @@ public class ShiroConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //默认跳转到登陆页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/shiro/login");
         //登陆（成功或失败）后的页面
-        shiroFilterFactoryBean.setSuccessUrl("/login/home");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login");
+        shiroFilterFactoryBean.setSuccessUrl("/shiro/home");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/shiro/login");
         //自定义拦截器
         Map<String, Filter> filterMap = new LinkedHashMap();
         shiroFilterFactoryBean.setFilters(filterMap);
         //权限控制map
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap();
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/login/logout", "logout");
-        filterChainDefinitionMap.put("/login/auth","authc,perms[access:auth]");
-        filterChainDefinitionMap.put("/login/user","user,perms[access:user]");
+        filterChainDefinitionMap.put("/shiro/login", "anon");
+        filterChainDefinitionMap.put("/shiro/logout", "logout");
+        filterChainDefinitionMap.put("/shiro/auth","authc,perms[access:auth]");
+        filterChainDefinitionMap.put("/shiro/user","user,perms[access:user]");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
