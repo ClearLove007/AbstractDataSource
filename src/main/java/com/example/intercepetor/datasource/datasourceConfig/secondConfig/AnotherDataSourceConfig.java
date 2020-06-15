@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * @Author: XueWeiDong
- * @Description:
+ * @Description: 获取配置文件配置的多个数据库
  * @Date: 14:02 2019/12/2
  */
 @Configuration
